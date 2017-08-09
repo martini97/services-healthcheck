@@ -1,2 +1,10 @@
 language: node_js
 node_js: lts/*
+deploy:
+  provider: npm
+  email: alessandrofmartini@gmail.com
+  api_key:
+    secure: mSDwdJkDJbnZVNHgzS5Z5LtFmiZrwcv1FN4bPqtfFGfumv92KxGpx06USCPM4zZinGn0egTI45N9N2XcOhoHr15EgL9W0JNaKxwPP54Lijq8zu4DfRIl/xGkaclUlztdhhd6uxjyZy9wo6aDPBrVbQcXT+gnHcKOw10lILETprLAqyYXaBUPIFmmjaSW643H21TSEZ3XlahPTY/cDu5Wpy5unrXJvMIODHK6qtrjmIB+4lrUOm4SR4fsQo8LGLs8qepjx8PGMVkODusQ3MM21hcqV+ggEIUrUAPS8k0wxpaVe9yUS/WouKq8Yb/QGqIDai7Fdvv0nCXa9ksKT6NICX8hgHrFCsn30Hk8rvZm5Q90TJaQZUahKi7rDXy/OTBHCsaTs+PVl08vwTG6mwWnhwDe54l6heBLX6kspdeIkbwpEpBvfK7X5r8LLqNfXuSR7XjjmQg9LBoKLibWmWAG+y6Ie9UyKo8nigP01aL+fGAaL+QK9mUOQvNw9z33hcfXfZyGtgc+iy+KHReYoMRqZ68UPuOJ3OOX5tKEQQlzqxb5Q3jf0NPhgRi5ZyKVeOwxJ8YZ3WVDR2VoVj9TaTzLEq3y7ymB1T313gjO9wBUN8MiXphaxMFqXfwnNufipBLKeH5kXTLbAdr21kzPe+Z8uLYKwL3iTXRjaE5YNhl0X14=
+  on:
+    repo: martini97/healthcheck-middleware
+    branch: master
