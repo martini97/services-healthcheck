@@ -26,9 +26,9 @@ const servicesAllUp = {
   'service-x': getServiceUrl,
 };
 
-async function application() {
+function application() {
   const app = express();
-  app.use(await healthcheck(servicesAllUp));
+  app.use(healthcheck(servicesAllUp));
   return app;
 };
 
