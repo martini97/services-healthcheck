@@ -8,3 +8,5 @@ deploy:
   on:
     repo: martini97/healthcheck-middleware
     branch: master
+after_success:
+  - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
