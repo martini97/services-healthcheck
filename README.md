@@ -9,7 +9,7 @@ Simple module to check the health status of a service dependencies
 
 ```js  
 const express = require('express');
-const healthcheck = require('@martini97/healthcheck-middleware').default;
+const healthcheck = require('services-healthcheck').default;
 
 const servicesAllUp = {
   'service-1': 'http://service-1',
