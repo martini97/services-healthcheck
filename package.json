@@ -1,6 +1,6 @@
 {
   "name": "@martini97/healthcheck-middleware",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Middleware to check if the service dependencies are up",
   "main": "lib/index.js",
   "scripts": {
