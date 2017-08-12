@@ -43,3 +43,5 @@ async function start() {
 
 start();
 ```
+
+After that, it will add a /_health route, that returns the status of the services passed
