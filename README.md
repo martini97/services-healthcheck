@@ -22,17 +22,18 @@ const getRandomArbitrary = (min, max) => {
 
 const getServiceUrl = () => return `http://service-{getRandomArbitrary(5, 10)}`;
 
-const servicesAllUp = {
+const services = {
   'service-1': 'http://service-1',
   'service-2': 'http://service-2',
   'service-3': 'http://service-3',
   'service-4': 'http://service-4',
+  'service-5': { url: 'http://service-custom-ping', route: '/health/_ping' },
   'service-x': getServiceUrl,
 };
 
 function application() {
   const app = express();
-  app.use(healthcheck(servicesAllUp));
+  app.use(healthcheck(services));
   return app;
 };
 
