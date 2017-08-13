@@ -21,6 +21,12 @@ const servicesSomeDown = {
   'service-7': 'http://service-7',
   'service-8': 'http://service-8',
 };
+const servicesCustomPingRoute = {
+  'service-9': { url: 'http://service-9', route: '/ping/health' },
+  'service-10': { url: 'http://service-10', route: '/ping' },
+  'service-11': { url: 'http://service-11', route: '/custom-ping' },
+  'service-12': { url: 'http://service-12', route: '/_health/_ping' },
+};
 
 const servicesAllUpHealth = {
   'service-1': { status: 200 },
@@ -34,6 +40,12 @@ const servicesSomeDownHealth = {
   'service-7': { error: 500, status: 500 },
   'service-8': { status: 200 },
 };
+const servicesCustomPingRouteHealth = {
+  'service-9':  { error: 500, status: 500 },
+  'service-10': { status: 200 },
+  'service-11': { error: 500, status: 500 },
+  'service-12': { status: 200 },
+};
 
 /* mocks */
 mock.onGet('http://service-1/_ping').reply(200);
@@ -44,24 +56,35 @@ mock.onGet('http://service-5/_ping').reply(500);
 mock.onGet('http://service-6/_ping').reply(500);
 mock.onGet('http://service-7/_ping').reply(500);
 mock.onGet('http://service-8/_ping').reply(200);
+mock.onGet('http://service-9/ping/health').reply(500);
+mock.onGet('http://service-10/ping').reply(200);
+mock.onGet('http://service-11/custom-ping').reply(500);
+mock.onGet('http://service-12/_health/_ping').reply(200);
 
 /* middleware */
 feature('using the middleware', scenario => {
   scenario('should return services health', async t => {
     const app = express();
-    app.use(await middleware(servicesAllUp));
+    app.use(middleware(servicesAllUp));
     const { body } = await supertest(app)
       .get('/_health');
 
     t.deepEqual(body, servicesAllUpHealth);
   });
-
   scenario('should return services health again', async t => {
     const app = express();
-    app.use(await middleware(servicesSomeDown));
+    app.use(middleware(servicesSomeDown));
     const { body } = await supertest(app)
       .get('/_health');
 
     t.deepEqual(body, servicesSomeDownHealth);
+  });
+  scenario('given that some services have custom ping routes', async t => {
+    const app = express();
+    app.use(middleware(servicesCustomPingRoute));
+    const { body } = await supertest(app)
+      .get('/_health');
+
+    t.deepEqual(body, servicesCustomPingRouteHealth);
   });
 });

@@ -22,6 +22,12 @@ const servicesSomeDown = {
 const servicesSomeFunction = {
   'service-9': () => 'http://service-8',
 };
+const servicesCustomPing = {
+  'service-10': { url: 'http://service-10', route: '/health/ping' },
+  'service-11': { url: 'http://service-11', route: '/_custom-ping' },
+  'service-12': 'http://service-3',
+  'service-13': 'http://service-4',
+};
 
 const servicesAllUpHealth = {
   'service-1': { status: 200 },
@@ -38,6 +44,12 @@ const servicesSomeDownHealth = {
 const servicesSomeFunctionHealth = {
   'service-9': { status: 200 },
 };
+const servicesCustomPingHealth = {
+  'service-10': { status: 200 },
+  'service-11': { status: 200 },
+  'service-12': { status: 200 },
+  'service-13': { status: 200 },
+};
 
 /* mocks */
 mock.onGet('http://service-1/_ping').reply(200);
@@ -49,6 +61,8 @@ mock.onGet('http://service-6/_ping').reply(500);
 mock.onGet('http://service-7/_ping').reply(500);
 mock.onGet('http://service-8/_ping').reply(200);
 mock.onGet('http://service-9/_ping').reply(200);
+mock.onGet('http://service-10/health/ping').reply(200);
+mock.onGet('http://service-11/_custom-ping').reply(200);
 
 /* healthcheck */
 feature('running health check on services', scenario => {
@@ -63,5 +77,9 @@ feature('running health check on services', scenario => {
   scenario('given that some services are functions', async t => {
     const health = await healthCheck(servicesSomeFunction);
     t.deepEqual(health, servicesSomeFunctionHealth);
+  });
+  scenario('given that some services have custom ping route', async t => {
+    const health = await healthCheck(servicesCustomPing);
+    t.deepEqual(health, servicesCustomPingHealth);
   });
 });

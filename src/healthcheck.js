@@ -1,7 +1,7 @@
 import ping from './ping';
 
 function getUrl(value) {
-  let url;
+  let url, route;
   switch (typeof value) {
     case 'string':
       url = value;
@@ -9,11 +9,15 @@ function getUrl(value) {
     case 'function':
       url = value();
       break;
+    case 'object':
+      url = value.url;
+      route = value.route;
+      break;
     default:
       url = value;
   }
 
-  return url;
+  return { url, route };
 }
 
 export default async services => {
