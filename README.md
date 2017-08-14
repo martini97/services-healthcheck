@@ -1,5 +1,5 @@
 # services-healthcheck  
-[![Build Status](https://travis-ci.org/martini97/healthcheck-middleware.svg?branch=master)](https://travis-ci.org/martini97/healthcheck-middleware)  
+[![Build Status](https://travis-ci.org/martini97/services-healthcheck.svg?branch=master)](https://travis-ci.org/martini97/services-healthcheck)  
 Simple module to check the health status of a service dependencies
 
 ## Installing
