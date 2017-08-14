@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-export default async ({ url, route }) => {
+import databaseIsUp from './database';
+
+export default async ({ url, route, knex }) => {
+  if (knex) {
+    const isUp = await databaseIsUp(knex);
+    return { status: isUp ? 200 : 500 };
+  }
+
   route = route || '/_ping';
   const pingUrl = `${url}${route}`;
   try {

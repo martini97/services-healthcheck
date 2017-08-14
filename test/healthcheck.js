@@ -1,6 +1,24 @@
 import axios from 'axios';
 import { feature } from 'ava-spec';
 import MockAdapter from 'axios-mock-adapter';
+import knex from 'knex';
+import mockKnex from 'mock-knex';
+
+const knexUp = knex({
+  client: 'mysql',
+  connection: {
+    host: 'localhost',
+    user: 'user',
+    password: 'password',
+    database: 'database',
+    port: 3306,
+  },
+  debug: false,
+});
+
+const knexDown = knex({
+  client: 'mysql',
+});
 
 import healthCheck from '../lib/healthcheck';
 
@@ -28,6 +46,10 @@ const servicesCustomPing = {
   'service-12': 'http://service-3',
   'service-13': 'http://service-4',
 };
+const servicesDatabase = {
+  'db-up': { knex: knexUp },
+  'db-down': { knex: knexDown },
+};
 
 const servicesAllUpHealth = {
   'service-1': { status: 200 },
@@ -50,6 +72,17 @@ const servicesCustomPingHealth = {
   'service-12': { status: 200 },
   'service-13': { status: 200 },
 };
+const servicesDatabaseHealth = {
+  'db-up': { status: 200 },
+  'db-down': { status: 500 },
+};
+
+const tracker = mockKnex.getTracker();
+mockKnex.mock(knexUp);
+tracker.install();
+tracker.on('query', query => {
+  query.response();
+});
 
 /* mocks */
 mock.onGet('http://service-1/_ping').reply(200);
@@ -81,5 +114,9 @@ feature('running health check on services', scenario => {
   scenario('given that some services have custom ping route', async t => {
     const health = await healthCheck(servicesCustomPing);
     t.deepEqual(health, servicesCustomPingHealth);
+  });
+  scenario('given that some services are databases', async t => {
+    const health = await healthCheck(servicesDatabase);
+    t.deepEqual(health, servicesDatabaseHealth);
   });
 });

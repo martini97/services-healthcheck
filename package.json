@@ -13,7 +13,8 @@
     "test": "ava --verbose"
   },
   "dependencies": {
-    "axios": "^0.16.2"
+    "axios": "^0.16.2",
+    "knex": "^0.13.0"
   },
   "devDependencies": {
     "ava": "^0.19.1",
@@ -40,6 +41,7 @@
     "eslint-plugin-mysticatea": "^4.2.2",
     "eslint-plugin-node": "^5.1.1",
     "express": "^4.15.4",
+    "mock-knex": "^0.3.9",
     "npm-run-all": "^4.0.2",
     "nyc": "^11.1.0",
     "rimraf": "^2.6.1",
