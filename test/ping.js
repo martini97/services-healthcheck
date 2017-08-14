@@ -43,7 +43,7 @@ feature('pinging an url', scenario => {
     t.is(error, undefined);
   });
   scenario('given that the url has a custom ping route', async t => {
-    const { status, error } = await ping({ url: serviceCustomPingRoute, route: '/_custom-ping'});
+    const { status, error } = await ping({ url: serviceCustomPingRoute, route: '/_custom-ping' });
     t.is(status, 200);
     t.is(error, undefined);
   });
