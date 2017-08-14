@@ -10,10 +10,12 @@ To install it, just use npm:
 
 ### Parameters
 - `services`:  
-  An object mapping the service name to its URL or to it's URL getter, the service must have a /_ping route.
+  An object mapping the service name to its URL or to it's URL getter (the service must have a /_ping route), or to a knex connection.
+	Supported DB's: Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle.
 
 ```js  
 const express = require('express');
+const knex = require('knex');
 const healthcheck = require('services-healthcheck').default;
 
 const getRandomArbitrary = (min, max) => {
@@ -22,17 +24,31 @@ const getRandomArbitrary = (min, max) => {
 
 const getServiceUrl = () => return `http://service-{getRandomArbitrary(5, 10)}`;
 
-const servicesAllUp = {
+const knexInstance = knex({
+  client: 'mysql',
+  connection: {
+    host: 'localhost',
+    user: 'user',
+    password: 'password',
+    database: 'database',
+    port: 3306,
+  },
+  debug: false,
+});
+
+const services = {
   'service-1': 'http://service-1',
   'service-2': 'http://service-2',
   'service-3': 'http://service-3',
   'service-4': 'http://service-4',
+  'service-5': { url: 'http://service-custom-ping', route: '/health/_ping' },
   'service-x': getServiceUrl,
+  'db-1':      { knex: knexInstance },
 };
 
 function application() {
   const app = express();
-  app.use(healthcheck(servicesAllUp));
+  app.use(healthcheck(services));
   return app;
 };
 
