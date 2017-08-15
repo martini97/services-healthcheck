@@ -12,6 +12,7 @@ function getService(value) {
   let url;
   let route;
   let knex;
+  let queue;
   switch (typeof value) {
     case 'string':
       url = value;
@@ -25,6 +26,11 @@ function getService(value) {
         break;
       }
 
+      if (value.queue) {
+        queue = value.queue;
+        break;
+      }
+
       url = value.url;
       route = value.route;
       break;
@@ -32,7 +38,7 @@ function getService(value) {
       return {};
   }
 
-  return { url, route, knex };
+  return { url, route, knex, queue };
 }
 
 /**
