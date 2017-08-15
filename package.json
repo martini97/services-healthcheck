@@ -8,10 +8,10 @@
     "dev": "cross-env NODE_ENV=development babel --watch --source-maps --out-dir=lib/ src/",
     "clean": "rimraf lib dist coverage",
     "prepublish": "run-s clean build",
-    "lint": "eslint --ext js .",
     "removeSkip": "sed -i.bak 's/.skip//' test/*",
     "pretest": "npm run build",
-    "test": "ava test/*.spec.js --verbose"
+    "lint": "eslint .",
+    "test": "eslint . && ava test/*.spec.js --verbose"
   },
   "dependencies": {
     "amqp": "^0.2.6",
