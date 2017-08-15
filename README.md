@@ -44,6 +44,7 @@ const services = {
   'service-5': { url: 'http://service-custom-ping', route: '/health/_ping' },
   'service-x': getServiceUrl,
   'db-1':      { knex: knexInstance },
+	'queue-1': { queue: { host: 'localhost', port: '5672' } }
 };
 
 function application() {
