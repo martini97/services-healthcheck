@@ -8,7 +8,18 @@ import middleware from '../lib/middleware';
 
 const mock = new MockAdapter(axios);
 
+const amqpDownConfig = { host: 'localhost', port: '5680' };
+const amqpUpConfig = { host: 'localhost', port: '5672' };
+
 /* consts */
+const servicesQueue = {
+  'queue-up': { queue: amqpUpConfig },
+  'queue-down': { queue: amqpDownConfig },
+};
+const servicesQueueHealth = {
+  'queue-up': { status: 200 },
+  'queue-down': { status: 500 },
+};
 const servicesAllUp = {
   'service-1': 'http://service-1',
   'service-2': 'http://service-2',
@@ -86,5 +97,13 @@ feature('using the middleware', scenario => {
       .get('/_health');
 
     t.deepEqual(body, servicesCustomPingRouteHealth);
+  });
+  scenario.skip('given that you are checking queues', async t => {
+    const app = express();
+    app.use(middleware(servicesQueue));
+    const { body } = await supertest(app)
+      .get('/_health');
+
+    t.deepEqual(body, servicesQueueHealth);
   });
 });

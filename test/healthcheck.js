@@ -22,6 +22,9 @@ const knexDown = knex({
   client: 'mysql',
 });
 
+const amqpDownConfig = { host: 'localhost', port: '5680' };
+const amqpUpConfig = { host: 'localhost', port: '5672' };
+
 const mock = new MockAdapter(axios);
 
 /* consts */
@@ -50,6 +53,10 @@ const servicesDatabase = {
   'db-up': { knex: knexUp },
   'db-down': { knex: knexDown },
 };
+const servicesQueue = {
+  'queue-up': { queue: amqpUpConfig },
+  'queue-down': { queue: amqpDownConfig },
+};
 
 const servicesAllUpHealth = {
   'service-1': { status: 200 },
@@ -75,6 +82,10 @@ const servicesCustomPingHealth = {
 const servicesDatabaseHealth = {
   'db-up': { status: 200 },
   'db-down': { status: 500 },
+};
+const servicesQueueHealth = {
+  'queue-up': { status: 200 },
+  'queue-down': { status: 500 },
 };
 
 const tracker = mockKnex.getTracker();
@@ -118,5 +129,9 @@ feature('running health check on services', scenario => {
   scenario('given that some services are databases', async t => {
     const health = await healthCheck(servicesDatabase);
     t.deepEqual(health, servicesDatabaseHealth);
+  });
+  scenario.skip('given that you are checking queues', async t => {
+    const health = await healthCheck(servicesQueue);
+    t.deepEqual(health, servicesQueueHealth);
   });
 });

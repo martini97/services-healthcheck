@@ -84,3 +84,17 @@ feature('pinging a database', scenario => {
     t.is(status, 500);
   });
 });
+
+const amqpDownConfig = { host: 'localhost', port: '5680' };
+const amqpUpConfig = { host: 'localhost', port: '5672' };
+
+feature('pinging queue', scenario => {
+  scenario.skip('given that the queue is up', async t => {
+    const { status } = await ping({ queue: amqpUpConfig });
+    t.is(status, 200);
+  });
+  scenario('given that the queue is down', async t => {
+    const { status } = await ping({ queue: amqpDownConfig });
+    t.is(status, 500);
+  });
+});
