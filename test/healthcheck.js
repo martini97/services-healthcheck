@@ -4,6 +4,8 @@ import MockAdapter from 'axios-mock-adapter';
 import knex from 'knex';
 import mockKnex from 'mock-knex';
 
+import healthCheck from '../lib/healthcheck';
+
 const knexUp = knex({
   client: 'mysql',
   connection: {
@@ -19,8 +21,6 @@ const knexUp = knex({
 const knexDown = knex({
   client: 'mysql',
 });
-
-import healthCheck from '../lib/healthcheck';
 
 const mock = new MockAdapter(axios);
 

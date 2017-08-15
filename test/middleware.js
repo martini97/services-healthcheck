@@ -41,7 +41,7 @@ const servicesSomeDownHealth = {
   'service-8': { status: 200 },
 };
 const servicesCustomPingRouteHealth = {
-  'service-9':  { error: 500, status: 500 },
+  'service-9': { error: 500, status: 500 },
   'service-10': { status: 200 },
   'service-11': { error: 500, status: 500 },
   'service-12': { status: 200 },
