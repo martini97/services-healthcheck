@@ -48,7 +48,15 @@
     "rimraf": "^2.6.1",
     "supertest": "^3.0.0"
   },
-  "repository": "martini97/healthcheck-middleware",
+  "repository": "martini97/services-healthcheck",
+  "keywords": [
+    "healthcheck",
+    "axios",
+    "services",
+    "amqp",
+    "middleware",
+    "express"
+  ],
   "license": "MIT",
   "engines": {
     "node": ">=4"
