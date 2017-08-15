@@ -10,10 +10,9 @@
     "prepublish": "run-s clean build",
     "lint": "eslint --ext js .",
     "pretest": "npm run build",
-    "test": "ava test/*.spec.js --verbose"
+    "test": "ava --verbose"
   },
   "dependencies": {
-    "amqp": "^0.2.6",
     "axios": "^0.16.2"
   },
   "devDependencies": {
@@ -45,6 +44,7 @@
     "mock-knex": "^0.3.9",
     "mysql": "^2.14.1",
     "npm-run-all": "^4.0.2",
+    "nyc": "^11.1.0",
     "rimraf": "^2.6.1",
     "supertest": "^3.0.0"
   },
