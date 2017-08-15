@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import databaseIsUp from './database';
+import queueIsUp from './queue';
 
 /**
  * ping connects with the service passed and returns it's status.
@@ -10,9 +11,14 @@ import databaseIsUp from './database';
  * @returns {Object} - the status code of the connection, and the error code if
  * there was one.
  */
-export default async ({ url, route, knex }) => {
+export default async ({ url, route, knex, queue }) => {
   if (knex) {
     const isUp = await databaseIsUp(knex);
+    return { status: isUp ? 200 : 500 };
+  }
+
+  if (queue) {
+    const isUp = await queueIsUp(queue);
     return { status: isUp ? 200 : 500 };
   }
 

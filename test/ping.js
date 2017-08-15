@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { feature } from 'ava-spec';
 import MockAdapter from 'axios-mock-adapter';
+import knex from 'knex';
+import mockKnex from 'mock-knex';
 
 import ping from '../lib/ping';
 
@@ -46,5 +48,39 @@ feature('pinging an url', scenario => {
     const { status, error } = await ping({ url: serviceCustomPingRoute, route: '/_custom-ping' });
     t.is(status, 200);
     t.is(error, undefined);
+  });
+});
+
+const knexUp = knex({
+  client: 'mysql',
+  connection: {
+    host: 'localhost',
+    user: 'user',
+    password: 'password',
+    database: 'database',
+    port: 3306,
+  },
+  debug: false,
+});
+
+const knexDown = knex({
+  client: 'mysql',
+});
+
+feature('pinging a database', scenario => {
+  scenario('given that the database is up', async t => {
+    const tracker = mockKnex.getTracker();
+    mockKnex.mock(knexUp);
+    tracker.install();
+    tracker.on('query', query => {
+      query.response();
+    });
+
+    const { status } = await ping({ knex: knexUp });
+    t.is(status, 200);
+  });
+  scenario('given that the database is down', async t => {
+    const { status } = await ping({ knex: knexDown });
+    t.is(status, 500);
   });
 });
