@@ -10,7 +10,7 @@
     "prepublish": "run-s clean build",
     "lint": "eslint --ext js .",
     "pretest": "npm run build",
-    "test": "ava --verbose"
+    "test": "ava test/*.spec.js --verbose"
   },
   "dependencies": {
     "amqp": "^0.2.6",
