@@ -1,5 +1,6 @@
 const knex = require('knex');
 const mockKnex = require('mock-knex');
+
 const amqpDownConfig = { host: 'localhost', port: '5680' };
 const amqpUpConfig = { host: 'localhost', port: '5672' };
 const knexUp = knex({

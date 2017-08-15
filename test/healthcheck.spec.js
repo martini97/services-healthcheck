@@ -1,16 +1,12 @@
 import axios from 'axios';
 import { feature } from 'ava-spec';
 import MockAdapter from 'axios-mock-adapter';
-import knex from 'knex';
 
 import healthCheck from '../lib/healthcheck';
 import {
   knexUp,
-  knexDown,
   mockKnex,
   knexTracker,
-  amqpUpConfig,
-  amqpDownConfig,
 } from './consts';
 import {
   servicesAllUp,

@@ -49,11 +49,9 @@ function getService(value) {
  */
 export default async services => {
   const result = {};
-  const keys = Object.keys(services);
 
-  for (let i = 0; i < keys.length; i++) {
-    const service = getService(services[keys[i]]);
-    result[keys[i]] = await ping(service);
+  for (const service of Object.keys(services)) {
+    result[service] = await ping(getService(services[service]));
   }
 
   return result;

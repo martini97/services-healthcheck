@@ -5,13 +5,6 @@ import MockAdapter from 'axios-mock-adapter';
 import supertest from 'supertest';
 
 import middleware from '../lib/middleware';
-
-const mock = new MockAdapter(axios);
-
-import {
-  amqpUpConfig,
-  amqpDownConfig,
-} from './consts';
 import {
   servicesQueue,
   servicesQueueHealth,
@@ -22,6 +15,8 @@ import {
   servicesCustomPing,
   servicesCustomPingHealth,
 } from './services';
+
+const mock = new MockAdapter(axios);
 
 mock.onGet('http://service-1/_ping').reply(200);
 mock.onGet('http://service-2/_ping').reply(200);
