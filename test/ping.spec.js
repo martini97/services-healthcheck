@@ -35,7 +35,7 @@ mock.onGet(`${serviceCustomPingRoute}/_custom-ping`).reply(200);
 async function comparePing(t, service, expected) {
   const response = await ping(service);
   t.deepEqual(response, expected);
-};
+}
 
 feature('pinging an url', scenario => {
   scenario('given that the url is up', async t => {
