@@ -5,7 +5,7 @@ import queueIsUp from './queue';
 
 /**
  * ping connects with the service passed and returns it's status.
- * @params {Object} - if there is an url, it will ping it on the route /_ping or
+ * @param {Object} - if there is an url, it will ping it on the route /_ping or
  * on the route that was passed and return it's status. If there is a knex it
  * will try to connect to the database, and return the connection status.
  * @returns {Object} - the status code of the connection, and the error code if

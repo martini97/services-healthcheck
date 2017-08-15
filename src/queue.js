@@ -2,7 +2,7 @@ import amqp from 'amqp';
 
 /**
  * connect returns a promise that will fail if the rabbitmq is down
- * @params {Object} amqpConnection - object to connect with rabbitmq.
+ * @param {Object} amqpConnection - object to connect with rabbitmq.
  * @returns {Promise} - a promise that will fail if rabbitmq is down.
  */
 function connect(amqpConnection) {
@@ -16,7 +16,7 @@ function connect(amqpConnection) {
 
 /**
  * returns a boolean, indicating rabbitmq status.
- * @params {Object} amqpConnection - object to connect with rabbitmq.
+ * @param {Object} amqpConnection - object to connect with rabbitmq.
  * @returns {boolean} - true if rabbitmq is up, false otherwise.
  */
 export default async (amqpConnection) => {
