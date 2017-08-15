@@ -62,12 +62,3 @@ start();
 ```
 
 After that, it will add a /_health route, that returns the status of the services passed
-
-## Contributing
-
-Anyone is welcome to contribute, with issues, tips, or code.
-If you want to run the tests you can use `npm test`, however you will notice that some tests are skipped,
-this is because I couldn't mock the amqp. If you wish to run those tests, you will need an instance
-running locally. You can do this by installing and running rabbitmq or by using docker:  
-`$ docker run -d --name amqp.test -p 5672:5672 rabbitmq`  
-After that, just remove the `.skip` from the test and run `npm test`.

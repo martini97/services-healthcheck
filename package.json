@@ -1,6 +1,6 @@
 {
   "name": "services-healthcheck",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "description": "Middleware to check if the service dependencies are up",
   "main": "lib/index.js",
   "scripts": {
@@ -48,7 +48,15 @@
     "rimraf": "^2.6.1",
     "supertest": "^3.0.0"
   },
-  "repository": "martini97/healthcheck-middleware",
+  "repository": "martini97/services-healthcheck",
+  "keywords": [
+    "healthcheck",
+    "axios",
+    "services",
+    "amqp",
+    "middleware",
+    "express"
+  ],
   "license": "MIT",
   "engines": {
     "node": ">=4"
