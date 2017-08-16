@@ -66,6 +66,7 @@ const serviceDownUrl = 'http://service-down-dependencie';
 const serviceTimeoutUrl = 'http://service-timeout-dependencie';
 const serviceNetworkErrorUrl = 'http://service-nw-error-dependencie';
 const serviceCustomPingRoute = 'http://service-custom-ping-route';
+const servicePingNotOkBut200 = 'http://service-not-ok-but-200';
 
 module.exports = {
   serviceUpUrl,
@@ -85,4 +86,5 @@ module.exports = {
   servicesDatabaseHealth,
   servicesQueue,
   servicesQueueHealth,
+  servicePingNotOkBut200,
 };

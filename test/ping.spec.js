@@ -9,6 +9,7 @@ import {
   serviceTimeoutUrl,
   serviceNetworkErrorUrl,
   serviceCustomPingRoute,
+  servicePingNotOkBut200,
 } from './services';
 import {
   statusOK,
@@ -26,11 +27,12 @@ import {
 const mock = new MockAdapter(axios);
 
 /* mocks */
-mock.onGet(`${serviceUpUrl}/_ping`).reply(200);
+mock.onGet(`${serviceUpUrl}/_ping`).reply(200, 'OK');
 mock.onGet(`${serviceDownUrl}/_ping`).reply(500);
 mock.onGet(`${serviceTimeoutUrl}/_ping`).timeout();
 mock.onGet(`${serviceNetworkErrorUrl}/_ping`).networkError();
-mock.onGet(`${serviceCustomPingRoute}/_custom-ping`).reply(200);
+mock.onGet(`${serviceCustomPingRoute}/_custom-ping`).reply(200, 'OK');
+mock.onGet(`${servicePingNotOkBut200}/_ping`).reply(200);
 
 async function comparePing(t, service, expected) {
   const response = await ping(service);
@@ -52,6 +54,9 @@ feature('pinging an url', scenario => {
   });
   scenario('given that the url has a custom ping route', async t => {
     await comparePing(t, { url: serviceCustomPingRoute, route: '/_custom-ping' }, statusOK);
+  });
+  scenario('given that ping does not return ok', async t => {
+    await comparePing(t, { url: servicePingNotOkBut200 }, statusFail);
   });
 });
 

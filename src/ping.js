@@ -25,12 +25,12 @@ export default async ({ url, route, knex, queue }) => {
   const pingRoute = route || '/_ping';
   const pingUrl = `${url}${pingRoute}`;
   try {
-    await axios({
+    const { data } = await axios({
       url: pingUrl,
       method: 'get',
     });
 
-    return { status: 200 };
+    return { status: data === 'OK' ? 200 : 500 };
   } catch (e) {
     return {
       status: 500,
