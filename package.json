@@ -1,6 +1,6 @@
 {
   "name": "services-healthcheck",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Middleware to check if the service dependencies are up",
   "main": "lib/index.js",
   "scripts": {
@@ -57,12 +57,13 @@
     "src"
   ],
   "ava": {
-    "babel": {
-      "presets": [
-        "es2016",
-        "stage-2",
-        "import-export"
-      ]
-    }
+    "presets": [
+      "es2016",
+      "stage-2",
+      "import-export"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
   }
 }
