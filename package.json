@@ -57,12 +57,13 @@
     "src"
   ],
   "ava": {
-    "babel": {
-      "presets": [
-        "es2016",
-        "stage-2",
-        "import-export"
-      ]
-    }
+    "presets": [
+      "es2016",
+      "stage-2",
+      "import-export"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
   }
 }
