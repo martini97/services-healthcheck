@@ -1,4 +1,7 @@
 {
-  "presets": ["es2015"],
-  "plugins": ["transform-es2015-modules-umd"]
+  "presets": [
+    "es2016",
+    "stage-2",
+    "import-export"
+  ]
 }
