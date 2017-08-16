@@ -1,6 +1,6 @@
 {
   "name": "services-healthcheck",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Middleware to check if the service dependencies are up",
   "main": "lib/index.js",
   "scripts": {
