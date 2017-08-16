@@ -18,17 +18,17 @@ import {
 
 const mock = new MockAdapter(axios);
 
-mock.onGet('http://service-1/_ping').reply(200);
-mock.onGet('http://service-2/_ping').reply(200);
-mock.onGet('http://service-3/_ping').reply(200);
-mock.onGet('http://service-4/_ping').reply(200);
+mock.onGet('http://service-1/_ping').reply(200, 'OK');
+mock.onGet('http://service-2/_ping').reply(200, 'OK');
+mock.onGet('http://service-3/_ping').reply(200, 'OK');
+mock.onGet('http://service-4/_ping').reply(200, 'OK');
 mock.onGet('http://service-5/_ping').reply(500);
 mock.onGet('http://service-6/_ping').reply(500);
 mock.onGet('http://service-7/_ping').reply(500);
-mock.onGet('http://service-8/_ping').reply(200);
+mock.onGet('http://service-8/_ping').reply(200, 'OK');
 mock.onGet('http://service-9/ping/health').reply(500);
-mock.onGet('http://service-10/health/ping').reply(200);
-mock.onGet('http://service-11/_custom-ping').reply(200);
+mock.onGet('http://service-10/health/ping').reply(200, 'OK');
+mock.onGet('http://service-11/_custom-ping').reply(200, 'OK');
 
 async function compareMiddlewareResponse(t, service, expected) {
   const app = express();
